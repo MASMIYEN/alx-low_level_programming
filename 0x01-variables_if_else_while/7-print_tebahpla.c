@@ -7,7 +7,7 @@
  *
  * Return: 0
  */
-inti main(void)
+int main(void)
 {
 	char letter;
 
