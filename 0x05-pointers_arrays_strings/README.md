@@ -9,6 +9,8 @@ _For this project, we expect you to look at these concepts:_
 
 -   [Pointers and arrays](https://intranet.alxswe.com/concepts/60)
 -   [Data Structures](https://intranet.alxswe.com/concepts/120)
+
+
 ![](https://s3.amazonaws.com/intranet-projects-files/holbertonschool-low_level_programming/216/IMG_2410.JPG)
 
 ## Resources
