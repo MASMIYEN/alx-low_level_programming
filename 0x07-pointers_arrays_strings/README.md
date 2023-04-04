@@ -1,5 +1,11 @@
 
 <img src="https://aceworldpub.com.ng/wp-content/uploads/2022/03/unnamed.png" width="200" height="100"> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" width="200" height="90"> 
+
+<img src="https://aceworldpub.com.ng/wp-content/uploads/2022/03/unnamed.png" width="200" height="100"> <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" width="200" height="90"> 
+
+![Pointers : r/ProgrammerHumor](https://preview.redd.it/zq29bu7imtw21.jpg?auto=webp&s=a8abbcf978139f942a0530a35a3c8f23af80f64b)
+
+
 # 0x07. C - Even more pointers, arrays and strings
 ## Resources
 
