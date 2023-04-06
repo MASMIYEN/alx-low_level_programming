@@ -4,18 +4,18 @@
  * sqrt_check - a function to check for the square of n
  *
  * @m: integer to guess in sqrt
- * @n: numbrt to find the sqrt of
+ * @p: numbrt to find the sqrt of
  *
  * Return: sqrt of n || -1
  */
 
-int sqrt_check(int m, int n)
+int sqrt_check(int m, int p)
 {
-	if (m * m == n)
+	if (m * m == p)
 		return (m);
-	if (m * m > n)
+	if (m * m > p)
 		return (-1);
-	return (sqrt_check(m + 1, n));
+	return (sqrt_check(m + 1, p));
 }
 
 /**
