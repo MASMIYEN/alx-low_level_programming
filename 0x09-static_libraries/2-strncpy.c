@@ -1,10 +1,11 @@
 #include "main.h"
 
 /**
- * _strncpy - copy a string
- * @dest: input value
- * @src: input value
- * @n: input value
+ * _strncpy - function that copies a string
+ *
+ * @dest: where to copy
+ * @src: where to copy from
+ * @n: i don't know what to call this integer
  *
  * Return: dest
  */
@@ -24,6 +25,5 @@ char *_strncpy(char *dest, char *src, int n)
 		dest[m] = '\0';
 		m++;
 	}
-
 	return (dest);
 }
