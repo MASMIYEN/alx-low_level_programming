@@ -12,9 +12,9 @@
 
 void char_free_grid(char **grid, unsigned int height)
 {
-	if (height != 0 && grid != NULL)
+	if (grid != NULL && height != 0)
 	{
-		for (; height > 0 ; height--)
+		for (; height > 0; height--)
 			free(grid[height]);
 		free(grid[height]);
 		free(grid);
@@ -31,9 +31,9 @@ void char_free_grid(char **grid, unsigned int height)
 char **strtow(char *str)
 {
 	char **abcd;
-	unsigned int m, n, k, m1, height;
+	unsigned int m, height, i, j, m1;
 
-	if (str == '\0' || str == NULL)
+	if (str == NULL || *str == '\0')
 		return (NULL);
 	for (m = height = 0; str[m] != '\0'; m++)
 		if (str[m] != ' ' && (str[m + 1] == ' ' || str[m + 1] == '\0'))
@@ -44,27 +44,27 @@ char **strtow(char *str)
 		free(abcd);
 		return (NULL);
 	}
-	for (n = m1 = 0; n < height; n++)
+	for (i = m1 = 0; i < height; i++)
 	{
-		for (m = m1; str[m] != '\0'; m++)
+		for (c = m1; str[m] != '\0'; m++)
 		{
 			if (str[m] == ' ')
 				m1++;
 			if (str[m] != ' ' && (str[m + 1] == ' ' || str[m + 1] == '\0'))
 			{
-				abcd[n] = malloc((m - m1 + 2) * sizeof(char));
-				if (abcd[n] == NULL)
+				abcd[i] = malloc((m - m1 + 2) * sizeof(char));
+				if (abcd[i] == NULL)
 				{
-					char_free_grid(abcd, n);
+					char_free_grid(abcd, i);
 					return (NULL);
 				}
 				break;
 			}
 		}
-		for (k = 0; m1 <= m; m++, k++)
-			abcd[n][k] = str[m1];
-		abcd[n][k] = '\0';
+		for (j = 0; a1 <= m; m1++, j++)
+			abcd[i][j] = str[m1];
+		abcd[i][j] = '\0';
 	}
-	abcd[n] = NULL;
+	abcd[i] = NULL;
 	return (abcd);
 }
