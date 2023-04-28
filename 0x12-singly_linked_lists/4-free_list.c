@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
- * free_list - free list 
+ * free_list - free list
  *
  * @head: pointer of the firts node
  *
@@ -10,7 +10,7 @@
 
 void free_list(list_t *head)
 {
-	list_t *actual; /* declaring */
+	list_t *actual;
 
 	while ((actual = head) != NULL)
 	{
