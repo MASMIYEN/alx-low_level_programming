@@ -23,7 +23,6 @@ size_t print_listint(const listint_t *h)
 
 		node_num++;
 	}
-
 	printf("%d\n", h->n);
 
 	return (node_num);
