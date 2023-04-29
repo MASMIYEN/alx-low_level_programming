@@ -19,7 +19,6 @@ size_t print_listint(const listint_t *h)
 	while (h->next != NULL)
 	{
 		printf("%d\n", h->n);
-		/*n is a member of a linked list node listint_t*/
 		h = h->next;
 		node_num++;
 	}
