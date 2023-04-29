@@ -31,16 +31,19 @@ listint_t *insert_nodeint_at_index(listint_t **head, unsigned int idx, int n);
 			return (NULL);
 	}
 	if (act_node->next)
+	{
 		nv_node->next = act_node->next;
 		act_node->next = nv_node;
-
+	}
 	else if (idx == 0)
+	{
 		nv_node->next = *head;
 		*head = nv_node;
-
+	}
 	else
+	{
 		nv_node->next = NULL;
 		act_node->next = nv_node;
-
+	}
 	return (nv_node);
 }
