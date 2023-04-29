@@ -25,5 +25,5 @@ int pop_listint(listint_t **head)
 
 	free(dino);
 
-	return(head_node);
+	return (head_node);
 }
