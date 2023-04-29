@@ -16,7 +16,7 @@ int pop_listint(listint_t **head)
 		return (0);
 
 	dino = *head;
-	
+
 	next = dino->next;
 
 	head_node = dino->n;
@@ -24,6 +24,6 @@ int pop_listint(listint_t **head)
 	*head = next;
 
 	free(dino);
-	
+
 	return(head_node);
 }
