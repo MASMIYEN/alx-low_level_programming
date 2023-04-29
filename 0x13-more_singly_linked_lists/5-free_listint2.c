@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
- * free_listint2 - freedom for list 
+ * free_listint2 - freedom for list
  *
  * @head: pointer of head node
  *
@@ -19,8 +19,8 @@ void free_listint2(listint_t **head)
 		while ((rid = act) != NULL)
 		{
 			act = act->next;
+			free(rid);
 		}
-		free(rid);
+		*head = NULL;
 	}
-	*head = NULL;
 }
