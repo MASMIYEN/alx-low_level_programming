@@ -9,9 +9,7 @@
  */
 size_t print_listint(const listint_t *h)
 {
-	size_t node_num;
-
-	node_num = 1;
+	size_t node_num  = 1;
 
 	if (h == NULL)
 		return (0);
@@ -19,6 +17,7 @@ size_t print_listint(const listint_t *h)
 	while (h->next != NULL)
 	{
 		printf("%d\n", h->n);
+
 		h = h->next;
 		node_num++;
 	}
