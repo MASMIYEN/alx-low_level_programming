@@ -21,7 +21,7 @@ size_t free_listint_safe(listint_t **h)
 		count++;
 		next = act->next;
 		free(act);
-		if (next>= act)
+		if (next >= act)
 			break;
 		act = next;
 	}
