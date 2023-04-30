@@ -7,7 +7,7 @@
  * @head: pointer of the head node
  * @index: index to remove
  *
- * Return 1 success || -1 fail
+ * Return: 1 success || -1 fail
  */
 int delete_nodeint_at_index(listint_t **head, unsigned int index)
 {
@@ -28,12 +28,15 @@ int delete_nodeint_at_index(listint_t **head, unsigned int index)
 	while (m < index - 1)
 	{
 		if (!rep || !(rep->next))
-			return(-1);
+			return (-1);
 		rep = rep->next;
 		m++;
 	}
 
 	act = rep->next;
+	if (!act)
+		return (-1);  /* index out of range */
+
 	rep->next = act->next;
 	free(act);
 
