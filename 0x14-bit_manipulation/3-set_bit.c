@@ -4,7 +4,7 @@
  * set_bit - set a bit's value to 1
  *
  * @n: pointer to number
- * @index: index to start from 0
+ * @index: index that start from 0
  *
  * Return: 1 on success || -1 on fail
  */
