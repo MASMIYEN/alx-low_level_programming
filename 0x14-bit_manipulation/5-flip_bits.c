@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * flip_bits - return bits number to flip
+ * flip_bits - return bits number to flip from n and m
  *
  * @n: unsigned int to flip
  * @m: unsigned int to flip too
