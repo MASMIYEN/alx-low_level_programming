@@ -1,20 +1,18 @@
 #include "main.h"
 
 /**
- * print_binary - print binary represtentation 
+ * print_binary - print binary represtentation
  * of a numberr
  *
  * @n: parameter of the function
  *
  * Return: binary rep
  */
-
 void print_binary(unsigned long int n)
 {
-	int m;
-	for (m = 63; m >= 0; m--)
+	if (n > 1)
 	{
-		printf("%ld", (n >> m) & 1);
+		print_binary(n >> 1);
 	}
-	printf("\n");
+	_putchar((n & 1) ? '1' : '0');
 }
