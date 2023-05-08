@@ -41,19 +41,19 @@ int main(int argc, char *argv[])
 		error("Error: Can't write to %s\n", argv[2], 99);
 	}
 
-	char buffer[BUFFER_SIZE];
-	ssize_t bytes_read, bytes_written;
+	char buffer[BUFFER_SZ];
+	ssize_t bts_read, bts_written;
 
-	bytes_written = write(cp_to, buffer, bytes_read);
+	bts_written = write(cp_to, buffer, bts_read);
 
-	while ((bytes_read = read(cp_from, buffer, BUFFER_SIZE)) > 0)
+	while ((bts_read = read(cp_from, buffer, BUFFER_SZ)) > 0)
 	{
-		if (bytes_written != bytes_read)
+		if (bts_written != bts_read)
 		{
 			error("Error: Write to %s failed\n", argv[2], 99);
 		}
 	}
-	if (bytes_read == -1)
+	if (bts_read == -1)
 	{
 		error("Error: Can't read from file %s\n", argv[1], 98);
 	}
