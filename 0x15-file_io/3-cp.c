@@ -29,8 +29,8 @@ int main(int argc, char *argv[])
 		error("Usage: %s file_from file_to\n", argv[0], 97);
 	}
 
-	int cp_from = open(argv[1], O_RDONLY);
-	int cp_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	int cp_from = open(argv[1], O_RDONLY),
+		cp_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 
 	if (cp_from == -1)
 	{
