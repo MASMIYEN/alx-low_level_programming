@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * error -
+ * error - handle error
  *
  * @log_msg: log message displayed
  * @arg: argument passed to program
