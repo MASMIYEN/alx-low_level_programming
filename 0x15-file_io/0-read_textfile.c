@@ -11,44 +11,45 @@
  */
 ssize_t read_textfile(const char *filename, size_t letters)
 {
-	if (filename == NULL)
-	{
-		return (0);
-	}
+    FILE *file_p;
+    char *buffer;
+    ssize_t bytes_read, bytes_write;
 
-	FILE *fl = fopen(filename, "r");
+    if (filename == NULL)
+    {
+        return 0;
+    }
 
-	if (fl == NULL)
-	{
-		return (0);
-	}
+    file_p = fopen(filename, "r");
+    if (file_p == NULL)
+    {
+        return 0;
+    }
 
-	char *buffer = malloc(sizeof(char) * letters);
+    buffer = malloc(sizeof(char) * letters);
+    if (buffer == NULL)
+    {
+        fclose(file_p);
+        return 0;
+    }
 
-	if (buffer == NULL)
-	{
-		fclose(fl);
-		return (0);
-	}
+    bytes_read = fread(buffer, sizeof(char), letters, file_p);
+    if (bytes_read == 0)
+    {
+        fclose(file_p);
+        free(buffer);
+        return 0;
+    }
 
-	ssize_t bytes_read = fread(buffer, sizeof(char), letters, fl);
+    bytes_write = write(STDOUT_FILENO, buffer, bytes_read);
+    if (bytes_write != bytes_read)
+    {
+        fclose(file_p);
+        free(buffer);
+        return 0;
+    }
 
-	if (bytes_read == 0)
-	{
-		fclose(fl);
-		free(buffer);
-		return (0);
-	}
-
-	ssize_t bytes_written = write(STDOUT_FILENO, buffer, bytes_read);
-
-	if (bytes_written != bytes_read)
-	{
-		fclose(fl);
-		free(buffer);
-		return (0);
-	}
-	fclose(fl);
-	free(buffer);
-	return (bytes_written);
+    fclose(file_p);
+    free(buffer);
+    return bytes_write;
 }
