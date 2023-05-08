@@ -1,7 +1,5 @@
 #include "main.h"
-
 #define MAXSIZE 1024
-
 
 /**
  * _error - prints error messages and exits with exit number
@@ -32,7 +30,6 @@ int _error(int error, char *str, int file_d)
 			return (0);
 	}
 }
-
 /**
  * main - create a copyfile
  *
