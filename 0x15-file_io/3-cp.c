@@ -1,10 +1,9 @@
 #include "main.h"
-
 #define MAXSIZE 1024
 
 
 /**
- * _error - prints error messages and exits with exit number
+ * print_error_and_exit - prints error messages and exits with exit number
  *
  * @error: either the exit number or file descriptor
  * @str: name of either file_in or file_out
@@ -12,25 +11,26 @@
  *
  * Return: 0 on success
 */
-int _error(int error, char *str, int file_d)
+void print_error_and_exit(int error, char *filename, int fd)
 {
 	switch (error)
 	{
 		case 97:
 			dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-			exit(error);
+			break;;
 		case 98:
-			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", s);
-			exit(error);
+			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
+			break;;
 		case 99:
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", s);
-			exit(error);
+			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
+			break;;
 		case 100:
 			dprintf(STDERR_FILENO, "Error: Can't close file_d %d\n", file_d);
-			exit(error);
+			break;;
 		default:
-			return (0);
+			break;
 	}
+	exit(error);
 }
 
 /**
@@ -43,43 +43,40 @@ int _error(int error, char *str, int file_d)
 */
 int main(int argc, char *argv[])
 {
-	int file_in, file_out;
+	int fd_from, fd_to;
 	int read_stat, write_stat;
-	int close_in, close_out;
 	char buffer[MAXSIZE];
 
 
 	if (argc != 3)
-		_error(97, NULL, 0);
+		print_error_and_exit(97, NULL, 0);
 
 
-	file_in = open(argv[1], O_RDONLY);
-	if (file_in == -1)
-		_error(98, argv[1], 0);
+	fd_from = open(argv[1], O_RDONLY);
+	if (fd_from == -1)
+		print_error_and_exit(98, argv[1], 0);
 
 
-	file_out = open(argv[2], O_CREAT | O_TRUNC | O_WRONLY, 0664);
-	if (file_out == -1)
-		_error(99, argv[2], 0);
+	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (fd_to == -1)
+		print_error_and_exit(99, argv[2], 0);
 
 
-	while ((read_stat = read(file_in, buffer, MAXSIZE)) != 0)
+	while ((read_stat = read(fd_from, buffer, MAXSIZE)) > 0)
 	{
-		if (read_stat == -1)
-			_error(98, argv[1], 0);
-
-		write_stat = write(file_out, buffer, read_stat);
-		if (write_stat == -1)
-			_error(99, argv[2], 0);
+		write_stat = write(fd_to, buffer, read_stat);
+		if (write_stat == -1 || write_stat != read_stat)
+		{
+			print_error_and_exit(99, argv[2], 0);
+		}
 	}
 
-	close_in = close(file_in);
-	if (close_in == -1)
-		_error(100, NULL, file_in);
+	if (read_stat == -1)
+		print_error_and_exit(98, argv[1], 0);
 
-	close_out = close(file_out);
-	if (close_out == -1)
-		_error(100, NULL, file_out);
+	if (close(fd_from) == -1)
+		print_error_and_exit(100, NULL, fd_from);
 
-	return (0);
+	if (close(fd_to) == -1)
+		return (0);
 }
