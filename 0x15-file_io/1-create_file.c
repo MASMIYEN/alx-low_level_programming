@@ -11,20 +11,20 @@
 
 int create_file(const char *filename, char *text_content)
 {
-    int file_des = open(filename, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
-    int len = 0;
-    ssize_t w = write(file_des, text_content, len);
+    int file_des, res, len;
 
+    if (filename == NULL)
+        return (-1);
 
-    if (filename == NULL || file_des == -1)
+    file_des = open(filename, O_WRONLY | O_CREAT | O_TRUNC, 0600);
+    if (file_des == -1)
         return (-1);
 
     if (text_content != NULL)
     {
-        while (text_content[len] != '\0')
-            len++;
-
-        if (w == -1)
+        len = strlen(text_content);
+        res = write(file_des, text_content, len);
+        if (res == -1 || res != len)
         {
             close(file_des);
             return (-1);
