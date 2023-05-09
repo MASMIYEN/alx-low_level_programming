@@ -1,4 +1,5 @@
 #include "main.h"
+
 #define ELF_MAGIC 0x7F454C46
 
 /**
@@ -8,34 +9,28 @@
  * @argv: command line arguments
  *
  * Return: 0
-*/
+ */
 
-int main(int argc, char *argv[])
-{
-  if (argc != 2)
-  {
+int main(int argc, char * argv[]) {
+  if (argc != 2) {
     fprintf(stderr, "Usage: elf_header elf_filename\n");
     exit(98);
   }
-  FILE *file = fopen(argv[1], "rb");
-  if (file == NULL)
-  {
+  FILE * file = fopen(argv[1], "rb");
+  if (file == NULL) {
     perror("fopen");
     exit(98);
   }
-  if (fseek(file, 0, SEEK_SET) != 0)
-  {
+  if (fseek(file, 0, SEEK_SET) != 0) {
     perror("fseek");
     exit(98);
   }
   struct elf_header header;
-  if (fread(&header, sizeof(header), 1, file) != 1)
-  {
+  if (fread( & header, sizeof(header), 1, file) != 1) {
     perror("fread");
     exit(98);
   }
-  if (header.e_ident[0] != ELF_MAGIC)
-  {
+  if (header.e_ident[0] != ELF_MAGIC) {
     fprintf(stderr, "Not an ELF file\n");
     exit(98);
   }
