@@ -4,9 +4,9 @@
 /**
  * print_error_and_exit - prints error messages and exits with exit number
  *
- * @error: either the exit number or file descriptor
- * @str: name of either file_in or file_out
- * @file_d: file descriptor
+ * @error: exit number or file descriptor
+ * @filename: name of file
+ * @fd: file descriptor
  *
  * Return: 0 on success
 */
