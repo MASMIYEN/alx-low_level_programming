@@ -9,10 +9,11 @@
  *
  *Return: 0
  */
+
 int main(int argc, char *argv[])
 {
-	static struct elf_header header;
-	FILE *fp = fopen(argv[1], "rb");;
+	struct elf_header header;
+	FILE *fp = fopen(argv[1], "rb");
 
 	if (argc != 2)
 		fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
