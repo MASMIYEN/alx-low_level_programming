@@ -16,16 +16,16 @@ void print_error_and_exit(int error, char *filename, int fd)
 	{
 		case 97:
 			dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-			break;;
+			break;
 		case 98:
 			dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", filename);
-			break;;
+			break;
 		case 99:
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
-			break;;
+			break;
 		case 100:
 			dprintf(STDERR_FILENO, "Error: Can't close file_d %d\n", file_d);
-			break;;
+			break;
 		default:
 			break;
 	}
