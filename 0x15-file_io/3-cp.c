@@ -24,7 +24,7 @@ void print_error_and_exit(int error, char *filename, int fd)
 			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", filename);
 			break;
 		case 100:
-			dprintf(STDERR_FILENO, "Error: Can't close file_d %d\n", file_d);
+			dprintf(STDERR_FILENO, "Error: Can't close file_d %d\n", fd);
 			break;
 		default:
 			break;
