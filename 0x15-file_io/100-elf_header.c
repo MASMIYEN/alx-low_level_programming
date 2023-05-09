@@ -37,7 +37,12 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Not an ELF file.\n");
 		exit(98);
 
-	printf("Magic: 0x%08x\n", header.e_ident[1] << 24 | header.e_ident[2] << 16 | header.e_ident[3] << 8 | header.e_ident[4]);
+	printf("Magic: 0x%08x\n",
+	header.e_ident[1] << 24 |
+	header.e_ident[2] << 16 |
+	header.e_ident[3] << 8 |
+	header.e_ident[4]
+	);
 	printf("Class: %d\n", header.e_ident[5]);
 	printf("Data: %d\n", header.e_ident[6]);
 	printf("Version: %d\n", header.e_version);
