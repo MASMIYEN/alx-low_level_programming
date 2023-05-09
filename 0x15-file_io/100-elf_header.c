@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
 		perror("fopen");
 		exit(98);
 	}
-
 	if (lseek(fileno(fp), 0, SEEK_SET) != 0)
 	{
 		perror("lseek");
@@ -39,15 +38,11 @@ int main(int argc, char *argv[])
 		perror("fread");
 		exit(98);
 	}
-
-
 	if (header.e_ident[0] != ELF_MAGIC)
 	{
 		fprintf(stderr, "Not an ELF file.\n");
 		exit(98);
 	}
-
-
 	printf("Magic: 0x%08x\n", header.e_ident[1] << 24 | header.e_ident[2] << 16 | header.e_ident[3] << 8 | header.e_ident[4]);
 	printf("Class: %d\n", header.e_ident[5]);
 	printf("Data: %d\n", header.e_ident[6]);
