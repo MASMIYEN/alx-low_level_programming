@@ -11,29 +11,30 @@
  */
 int main(int argc, char *argv[])
 {
+	static struct elf_header header;
+	FILE *fp;
+
 	if (argc != 2)
 		fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
-	exit(98);
+	return (1);
 
 	FILE *fp = fopen(argv[1], "rb");
 
 	if (fp == NULL)
 		perror("fopen");
-	exit(98);
+	return (1);
 
 	if (lseek(fileno(fp), 0, SEEK_SET) != 0)
 		perror("lseek");
-	exit(98);
-
-	static struct elf_header header;
+	return (1);
 
 	if (fread(&header, sizeof(header), 1, fp) != 1)
 		perror("fread");
-	exit(98);
+	return (1);
 
 	if (header.e_ident[0] != ELF_MAGIC)
 		fprintf(stderr, "Not an ELF file.\n");
-	exit(98);
+	return (1);
 
 	printf("Magic: 0x%08x\n",
 		header.e_ident[1] << 24 | header.e_ident[2] << 16 |
