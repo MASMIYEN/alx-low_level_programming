@@ -1,3 +1,14 @@
+#include "main.h"
+
+/**
+ *main - ELF program
+ *
+ *@argc: number of arguments
+ *@argv: command line arguments
+ *
+ *Return: 0
+ */
+
 int main(int argc, char *argv[])
 {
 	if (argc != 2)
