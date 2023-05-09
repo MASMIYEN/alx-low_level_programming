@@ -1,61 +1,217 @@
 #include "main.h"
+/**
+ * print_addr - prints address
+ * @ptr: regular pointer
+ *
+ * Return: Nothing :(
+ */
+void print_addr(char *ptr)
+{
+	int m;
+	int begin;
+	char sys;
+
+	printf("  Entry point address:               0x");
+
+	sys = ptr[4] + '0';
+	if (sys == '1')
+	{
+		begin = 26;
+		printf("80");
+		for (m = begin; m >= 22; m--)
+		{
+			if (ptr[i] > 0)
+				printf("%x", ptr[m]);
+			else if (ptr[m] < 0)
+				printf("%x", 256 + ptr[m]);
+		}
+		if (ptr[7] == 6)
+			printf("00");
+	}
+
+	if (sys == '2')
+	{
+		begin = 26;
+		for (m = begin; m > 23; m--)
+		{
+			if (ptr[m] >= 0)
+				printf("%02x", ptr[m]);
+
+			else if (ptr[m] < 0)
+				printf("%02x", 256 + ptr[m]);
+		}
+	}
+	printf("\n");
+}
 
 /**
- *main - ELF program
+ * print_type - prints type
+ * @ptr: regular pointer
  *
- *@argc: number of arguments
- *@argv: command line arguments
- *
- *Return: 0
+ * Return: Nothing :(
  */
-
-int main(int argc, char *argv[])
+void print_type(char *ptr)
 {
-	if (argc != 2)
-	{
-		fprintf(stderr, "Usage: %s<filename>\n", argv[0]);
-		exit(1);
-	}
+	char type = ptr[16];
 
-	int fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-	{
-		perror("open");
-		exit(1);
-	}
+	if (ptr[5] == 1)
+		type = ptr[16];
+	else
+		type = ptr[17];
 
-	Elf64_Ehdr elf_header;
-	if (read(fd, &elf_header, sizeof(elf_header)) != sizeof(elf_header))
-	{
-		perror("read");
-		exit(1);
-	}
+	printf("  Type:                              ");
+	if (type == 0)
+		printf("NONE (No file type)\n");
+	else if (type == 1)
+		printf("REL (Relocatable file)\n");
+	else if (type == 2)
+		printf("EXEC (Executable file)\n");
+	else if (type == 3)
+		printf("DYN (Shared object file)\n");
+	else if (type == 4)
+		printf("CORE (Core file)\n");
+	else
+		printf("<unknown: %x>\n", type);
+}
+
+/**
+ * print_osabi - prints OSABI
+ * @ptr: regular pointer
+ *
+ * Return: Nothing :(
+ */
+void print_osabi(char *ptr)
+{
+	char osabi = ptr[7];
+
+	printf("  OS/ABI:                            ");
+	if (osabi == 0)
+		printf("UNIX - System V\n");
+	else if (osabi == 2)
+		printf("UNIX - NetBSD\n");
+	else if (osabi == 6)
+		printf("UNIX - Solaris\n");
+	else
+		printf("<unknown: %x>\n", osabi);
+
+	printf("  ABI Version:                       %d\n", ptr[8]);
+}
+
+/**
+ * print_ver - prints system version
+ * @ptr: regular pointer
+ *
+ * Return: Nothing :(
+ */
+void print_ver(char *ptr)
+{
+	int version = ptr[6];
+
+	printf("  Version:                           %d", version);
+
+	if (version == EV_CURRENT)
+		printf(" (current)");
+
+	printf("\n");
+}
+
+/**
+ * print_data - prints data
+ * @ptr: regular pointer
+ *
+ * Return: Nothing :(
+ */
+void print_magic(char *ptr)
+{
+	int bytes;
+
+	printf("  Magic:  ");
+
+	for (bytes = 0; bytes < 16; bytes++)
+		printf(" %02x", ptr[bytes]);
+
+	printf("\n");
+}
+
+/**
+ * check_sys - check the version system.
+ * @ptr: regular pointer
+ *
+ * Return: Nothing :(
+ */
+void check_sys(char *ptr)
+{
+	char sys = ptr[4] + '0';
+
+	if (sys == '0')
+		exit(98);
 
 	printf("ELF Header:\n");
-	printf("  Magic: 0x%08x\n", elf_header.e_ident[EI_MAG0] |
-		(elf_header.e_ident[EI_MAG1] << 8) |
-		(elf_header.e_ident[EI_MAG2] << 16) |
-		(elf_header.e_ident[EI_MAG3] << 24));
-	printf("  Class: %d\n", elf_header.e_ident[EI_CLASS]);
-	printf("  Data: %d\n", elf_header.e_ident[EI_DATA]);
-	printf("  Version: %d\n", elf_header.e_ident[EI_VERSION]);
-	printf("  OS/ABI: %d\n", elf_header.e_ident[EI_OSABI]);
-	printf("  ABI Version: %d\n", elf_header.e_ident[EI_ABIVERSION]);
-	printf("  Type: %d\n", elf_header.e_type);
-	printf("  Machine: %d\n", elf_header.e_machine);
-	printf("  Version: %d\n", elf_header.e_version);
-	printf("  Entry point: 0x%lx\n", elf_header.e_entry);
-	printf("  Program header offset: 0x%lx\n", elf_header.e_phoff);
-	printf("  Section header offset: 0x%lx\n", elf_header.e_shoff);
-	printf("  Flags: 0x%x\n", elf_header.e_flags);
-	printf("  Size of this header: %d\n", elf_header.e_ehsize);
-	printf("  Size of program headers: %d\n", elf_header.e_phentsize);
-	printf("  Number of program headers: %d\n", elf_header.e_phnum);
-	printf("  Size of section headers: %d\n", elf_header.e_shentsize);
-	printf("  Number of section headers: %d\n", elf_header.e_shnum);
-	printf("  Section header string table index: %d\n", elf_header.e_shstrndx);
+	print_magic(ptr);
 
-	close(fd);
+	if (sys == '1')
+		printf("  Class:                             ELF32\n");
 
-	return 0;
+	if (sys == '2')
+		printf("  Class:                             ELF64\n");
+
+	print_data(ptr);
+	print_ver(ptr);
+	print_osabi(ptr);
+	print_type(ptr);
+	print_addr(ptr);
+}
+
+/**
+ * check_elf - check if ELF file
+ * @ptr: regular pointer
+ *
+ * Return: 1 if ELF file || 0 if not
+ */
+int check_elf(char *ptr)
+{
+	int addr = (int)ptr[0];
+	char E = ptr[1];
+	char L = ptr[2];
+	char F = ptr[3];
+
+	if (addr == 127 && E == 'E' && L == 'L' && F == 'F')
+		return (0);
+}
+
+/**
+ * main - check the code and main function btw
+ * @argc: arguments count
+ * @argv: array of arguments
+ *
+ * Return: 0
+ */
+int main(int argc, char *argv[])
+{
+	int file_des, ret_read;
+	char ptr[27];
+
+	if (argc != 2)
+	{
+		dprintf(STDERR_FILENO, "Usage: elf_header elf_filename\n");
+		exit(98);
+	}
+
+	file_des = open(argv[1], O_RDONLY);
+	if (file_des < 0)
+	{
+		dprintf(STDERR_FILENO, "Error: file cannot be opened\n");
+		exit(98);
+	}
+	lseek(file_des, 0, SEEK_SET);
+	ret_read = read(file_des, ptr, 27);
+	if (ret_read == -1)
+	{
+		dprintf(STDERR_FILENO, "Error: It's not an ELF\n");
+		exit(98);
+	}
+	check_sys(ptr);
+	close(file_des);
+
+	return (0);
 }
