@@ -11,7 +11,8 @@
  * Return: 0
  */
 
-int main(int argc, char * argv[]) {
+int main(int argc, char * argv[])
+{
   if (argc != 2) {
     fprintf(stderr, "Usage: elf_header elf_filename\n");
     exit(98);
