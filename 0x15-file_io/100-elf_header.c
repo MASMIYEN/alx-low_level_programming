@@ -12,13 +12,11 @@
 int main(int argc, char *argv[])
 {
 	static struct elf_header header;
-	FILE *fp;
+	FILE *fp = fopen(argv[1], "rb");;
 
 	if (argc != 2)
 		fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
 	return (1);
-
-	FILE *fp = fopen(argv[1], "rb");
 
 	if (fp == NULL)
 		perror("fopen");
