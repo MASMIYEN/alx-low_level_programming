@@ -1,6 +1,15 @@
 #include "main.h"
 #define ELF_MAGIC 0x7F454C46
 
+/**
+ * main - ELF program
+ *
+ * @argc: number of arguments
+ * @argv: command line arguments
+ *
+ * Return: 0
+*/
+
 int main(int argc, char *argv[])
 {
   if (argc != 2)
@@ -40,5 +49,6 @@ int main(int argc, char *argv[])
   printf("Entry point address: 0x%08x\n", header.e_entry);
 
   fclose(file);
+
   return (0);
 }
