@@ -9,6 +9,23 @@
  *
  *Return: 0
  */
+struct elf_header
+{
+	unsigned char e_ident[16];
+	int e_type;
+	int e_machine;
+	int e_version;
+	int e_entry;
+	int e_phoff;
+	int e_shoff;
+	int e_flags;
+	int e_ehsize;
+	int e_phentsize;
+	int e_phnum;
+	int e_shentsize;
+	int e_shnum;
+	int e_shstrndx;
+};
 
 int main(int argc, char *argv[])
 {
@@ -26,7 +43,7 @@ int main(int argc, char *argv[])
 		perror("lseek");
 	exit(98);
 
-	struct elf_header header;
+	static struct elf_header header;
 
 	if (fread(&header, sizeof(header), 1, fp) != 1)
 		perror("fread");
