@@ -77,4 +77,5 @@ int main(int argc, char *argv[])
 
 	if (close(fd_to) == -1)
 		return (0);
+	exit(0);
 }
