@@ -1,45 +1,44 @@
 #include "main.h"
-
 #define ELF_MAGIC 0x7F454C46
 
 /**
- * main - ELF program
+ *main - ELF program
  *
- * @argc: number of arguments
- * @argv: command line arguments
+ *@argc: number of arguments
+ *@argv: command line arguments
  *
- * Return: 0
+ *Return: 0
  */
 
 int main(int argc, char *argv[])
 {
 	if (argc != 2)
 		fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
-		exit(98);
+	exit(98);
 
 	FILE *fp = fopen(argv[1], "rb");
 
 	if (fp == NULL)
 		perror("fopen");
-		exit(98);
+	exit(98);
 
 	if (lseek(fileno(fp), 0, SEEK_SET) != 0)
 		perror("lseek");
-		exit(98);
+	exit(98);
 
 	struct elf_header header;
 
 	if (fread(&header, sizeof(header), 1, fp) != 1)
 		perror("fread");
-		exit(98);
+	exit(98);
 
 	if (header.e_ident[0] != ELF_MAGIC)
 		fprintf(stderr, "Not an ELF file.\n");
-		exit(98);
+	exit(98);
 
 	printf("Magic: 0x%08x\n",
-	header.e_ident[1] << 24 | header.e_ident[2] << 16 |
-	header.e_ident[3] << 8 | header.e_ident[4]);
+		header.e_ident[1] << 24 | header.e_ident[2] << 16 |
+		header.e_ident[3] << 8 | header.e_ident[4]);
 	printf("Class: %d\n", header.e_ident[5]);
 	printf("Data: %d\n", header.e_ident[6]);
 	printf("Version: %d\n", header.e_version);
