@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 	}
 
 	FILE *fp = fopen(argv[1], "rb");
+
 	if (fp == NULL)
 	{
 		perror("fopen");
@@ -31,9 +32,8 @@ int main(int argc, char *argv[])
 		perror("lseek");
 		exit(98);
 	}
-
-
 	struct elf_header header;
+
 	if (fread(&header, sizeof(header), 1, fp) != 1)
 	{
 		perror("fread");
