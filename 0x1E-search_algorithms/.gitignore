@@ -3,3 +3,8 @@
 *.bin
 *.json
 *.xml
+*.ninja
+.name
+a.out
+*.check_cache
+*.yaml
