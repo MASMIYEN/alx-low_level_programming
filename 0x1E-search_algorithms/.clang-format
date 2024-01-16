@@ -7,6 +7,6 @@ AllowShortIfStatementsOnASingleLine: false
 UseTab: Always
 IndentWidth: 8
 TabWidth: 8
-#InsertNewlineAtEOF: true
+InsertNewlineAtEOF: true
 ...
 # to run this script : clang-format -style=file -i your_file.c
