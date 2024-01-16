@@ -1,0 +1,12 @@
+---
+Language: Cpp
+ColumnLimit: 80
+SpacesInParentheses: false
+BreakBeforeBraces: Allman
+AllowShortIfStatementsOnASingleLine: false
+UseTab: Always
+IndentWidth: 8
+TabWidth: 8
+#InsertNewlineAtEOF: true
+...
+# to run this script : clang-format -style=file -i your_file.c
