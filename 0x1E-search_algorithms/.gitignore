@@ -8,3 +8,4 @@
 a.out
 *.check_cache
 *.yaml
+CMakeCCCompilerid.c
